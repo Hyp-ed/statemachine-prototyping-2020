@@ -6,6 +6,7 @@ SRCS_DIR:=src
 OBJS_DIR:=bin
 
 CFLAGS:=-pthread -std=c++11 -O2 -Wall -Wno-unused-result
+LFLAGS:=-lpthread -pthread
 
 CC:=g++
 
@@ -39,7 +40,7 @@ default: $(TARGET)
 
 $(TARGET): $(OBJS)
 	$(Echo) "Linking executable $(MAIN) into $@"
-	$(Verb) $(LL)  -o $@ $(OBJS)
+	$(Verb) $(LL)  -o $@ $(OBJS) $(LFLAGS)
 
 
 $(OBJS): $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp

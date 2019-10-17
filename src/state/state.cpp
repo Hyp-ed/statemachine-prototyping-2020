@@ -1,22 +1,17 @@
-#include <iostream>
+#include "state.hpp"
 
-using namespace std;
+namespace hyped {
+namespace state_machine {
 
-enum State {
-    kIdle,
-    kReady,
-    kAccelerating,
-    kDeccelerating,
-    kEmergencyBraking,
-    kFailureStopped,
-    kRunComplete
-};
+Main::Main(uint8_t id, Logger& log)
+    : Thread(id, log),
+      log_(log),
+      sys_(utils::System::getSystem())
+{}
 
-int main() {
+void Main::run() {
 
     State current_state_ = kIdle;
-
-    bool system_running_ = true;
 
     string input;
 
@@ -30,7 +25,7 @@ int main() {
       "RunComplete"
     };
     
-    while(system_running_){
+    while(sys_.running_){
 
       cout << "Current state: " << states[current_state_] << endl;
       cin >> input;
@@ -38,7 +33,6 @@ int main() {
       switch(current_state_) {
         case kIdle:
           if(input=="stop"){
-            system_running_ = false;
           } else if(input == "Critical_failure"){
             current_state_= kFailureStopped;
           } else if(input == "Start_calibrating"){
@@ -50,7 +44,6 @@ int main() {
           break;
         case kReady:
           if(input=="stop"){
-            system_running_ = false;
           } else if(input == "Critical_failure"){
             current_state_= kFailureStopped;
           } else if(input == "Launch"){
@@ -62,7 +55,6 @@ int main() {
           break;
         case kAccelerating:
           if(input=="stop"){
-            system_running_ = false;
           } else if(input == "Critical_failure"){
             current_state_= kEmergencyBraking;
           } else if(input == "Max_distance_reached"){
@@ -74,7 +66,6 @@ int main() {
           break;
         case kDeccelerating:
           if(input=="stop"){
-            system_running_ = false;
           } else if(input == "Critical_failure"){
             current_state_= kEmergencyBraking;
           } else if(input == "Not_moving"){
@@ -86,7 +77,6 @@ int main() {
           break;
         case kEmergencyBraking:
           if(input=="stop"){
-            system_running_ = false;
           } else if(input == "Not_moving"){
             current_state_= kFailureStopped;
           }
@@ -96,7 +86,6 @@ int main() {
           break;
         case kFailureStopped:
           if(input=="stop"){
-            system_running_ = false;
           } else if(input == "Reset"){
             current_state_= kIdle;
           }
@@ -106,7 +95,6 @@ int main() {
           break;
         case kRunComplete:
           if(input=="stop"){
-            system_running_ = false;
           } else if(input == "Critical_failure"){
             current_state_= kFailureStopped;
           } else if(input == "Reset"){
@@ -120,5 +108,5 @@ int main() {
           break;
         }
     }
-    return 0;
 }
+}} // namespace hyped::state_machine
