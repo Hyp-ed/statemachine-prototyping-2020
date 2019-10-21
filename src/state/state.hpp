@@ -29,7 +29,18 @@ namespace state_machine {
           kDeccelerating,
           kEmergencyBraking,
           kFailureStopped,
-          kRunComplete
+          kRunComplete,
+          kGarbage
+        };
+
+        enum Event {
+          CriticalFailure,
+          StartCali,
+          Launch,
+          MaxDisMeet,
+          Stop,
+          NotMoving,
+          Reset
         };
   };
 }

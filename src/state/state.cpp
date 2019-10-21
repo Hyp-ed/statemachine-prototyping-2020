@@ -24,6 +24,16 @@ void Main::run() {
       "FailureStopped",
       "RunComplete"
     };
+
+    string events[] = {
+      "Critical_Failure",
+      "Start_Calibrating",
+      "Launch",
+      "Max_Distance_Reached",
+      "Stop",
+      "Not_Moving",
+      "Reset"
+    };
     
     while(sys_.running_){
 
@@ -33,9 +43,10 @@ void Main::run() {
       switch(current_state_) {
         case kIdle:
           if(input=="stop"){
-          } else if(input == "Critical_failure"){
+            // current_state_ = kGarbage;
+          } else if(input == events[CriticalFailure]){
             current_state_= kFailureStopped;
-          } else if(input == "Start_calibrating"){
+          } else if(input == events[StartCali]){
             current_state_ = kReady;
           }
           else {
@@ -44,9 +55,9 @@ void Main::run() {
           break;
         case kReady:
           if(input=="stop"){
-          } else if(input == "Critical_failure"){
+          } else if(input == events[CriticalFailure]){
             current_state_= kFailureStopped;
-          } else if(input == "Launch"){
+          } else if(input == events[Launch]){
             current_state_ = kAccelerating;
           }
           else {
@@ -55,9 +66,9 @@ void Main::run() {
           break;
         case kAccelerating:
           if(input=="stop"){
-          } else if(input == "Critical_failure"){
+          } else if(input == events[CriticalFailure]){
             current_state_= kEmergencyBraking;
-          } else if(input == "Max_distance_reached"){
+          } else if(input == events[MaxDisMeet]){
             current_state_ = kDeccelerating;
           }
           else {
@@ -66,9 +77,9 @@ void Main::run() {
           break;
         case kDeccelerating:
           if(input=="stop"){
-          } else if(input == "Critical_failure"){
+          } else if(input == events[CriticalFailure]){
             current_state_= kEmergencyBraking;
-          } else if(input == "Not_moving"){
+          } else if(input == events[NotMoving]){
             current_state_ = kRunComplete;
           }
           else {
@@ -77,7 +88,7 @@ void Main::run() {
           break;
         case kEmergencyBraking:
           if(input=="stop"){
-          } else if(input == "Not_moving"){
+          } else if(input == events[NotMoving]){
             current_state_= kFailureStopped;
           }
           else {
@@ -86,7 +97,7 @@ void Main::run() {
           break;
         case kFailureStopped:
           if(input=="stop"){
-          } else if(input == "Reset"){
+          } else if(input == events[Reset]){
             current_state_= kIdle;
           }
           else {
@@ -95,9 +106,9 @@ void Main::run() {
           break;
         case kRunComplete:
           if(input=="stop"){
-          } else if(input == "Critical_failure"){
+          } else if(input == events[CriticalFailure]){
             current_state_= kFailureStopped;
-          } else if(input == "Reset"){
+          } else if(input == events[Reset]){
             current_state_ = kIdle;
           }
           else {
