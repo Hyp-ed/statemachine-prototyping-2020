@@ -31,7 +31,7 @@ void Main::run() {
       "Launch",
       "Max_Distance_Reached",
       "Stop",
-      "Not_Moving",
+      "Stationary",
       "Reset"
     };
     
@@ -42,8 +42,9 @@ void Main::run() {
 
       switch(current_state_) {
         case kIdle:
-          if(input=="stop"){
-            // current_state_ = kGarbage;
+          if(input==events[Stop]){
+            sys_.running_ = false;
+            cout << "Stop command received from user" << endl;
           } else if(input == events[CriticalFailure]){
             current_state_= kFailureStopped;
           } else if(input == events[StartCali]){
@@ -54,7 +55,9 @@ void Main::run() {
           }
           break;
         case kReady:
-          if(input=="stop"){
+          if(input==events[Stop]){
+            sys_.running_ = false;
+            cout << "Stop command received from user" << endl;
           } else if(input == events[CriticalFailure]){
             current_state_= kFailureStopped;
           } else if(input == events[Launch]){
@@ -65,7 +68,9 @@ void Main::run() {
           }
           break;
         case kAccelerating:
-          if(input=="stop"){
+          if(input==events[Stop]){
+            sys_.running_ = false;
+            cout << "Stop command received from user" << endl;
           } else if(input == events[CriticalFailure]){
             current_state_= kEmergencyBraking;
           } else if(input == events[MaxDisMeet]){
@@ -76,7 +81,9 @@ void Main::run() {
           }
           break;
         case kDeccelerating:
-          if(input=="stop"){
+          if(input==events[Stop]){
+            sys_.running_ = false;
+            cout << "Stop command received from user" << endl;
           } else if(input == events[CriticalFailure]){
             current_state_= kEmergencyBraking;
           } else if(input == events[NotMoving]){
@@ -87,7 +94,9 @@ void Main::run() {
           }
           break;
         case kEmergencyBraking:
-          if(input=="stop"){
+          if(input==events[Stop]){
+            sys_.running_ = false;
+            cout << "Stop command received from user" << endl;
           } else if(input == events[NotMoving]){
             current_state_= kFailureStopped;
           }
@@ -96,7 +105,9 @@ void Main::run() {
           }
           break;
         case kFailureStopped:
-          if(input=="stop"){
+          if(input==events[Stop]){
+            sys_.running_ = false;
+            cout << "Stop command received from user";
           } else if(input == events[Reset]){
             current_state_= kIdle;
           }
@@ -105,7 +116,9 @@ void Main::run() {
           }
           break;
         case kRunComplete:
-          if(input=="stop"){
+          if(input==events[Stop]){
+            sys_.running_ = false;
+            cout << "Stop command received from user";
           } else if(input == events[CriticalFailure]){
             current_state_= kFailureStopped;
           } else if(input == events[Reset]){
