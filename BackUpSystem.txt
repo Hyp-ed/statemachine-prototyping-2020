@@ -1,5 +1,6 @@
 What it does:
     1. Share the exact data structure with the main BBB (Sync with main BBB)
+        - So it can pick up the task asap
     2. Take over from main BBB if main BBB is destroyed/broken
 
 Specfications:
@@ -10,4 +11,4 @@ Pseudo Code:
     Set up connection with mainBBB
     Wiile mainBBB is working:
         Receive data point form mainBBB
-    Enter the states where mainBBB is destroyed/broken
+    Enter the state where mainBBB is destroyed/broken
