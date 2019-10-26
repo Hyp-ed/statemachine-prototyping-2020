@@ -1,0 +1,33 @@
+Spec/Rough Ideas:
+    1. There will be at least three BBB's running the exact same code.
+    2. All BBB's are connected to each others.
+    3. All BBB's are connected to sensors and electronics.
+    4. All BBB's are connected to the sensors and electronics.
+    5. Only the BBB with the highest pirority can control the electronics, while all BBB's read from the sensors.
+
+Hand Written Code:
+    Received assigned pirority
+    If (has the hughest pirority)
+        Gain control to electronics
+        Make it Master
+    Else
+        Make it Slave
+    Set up connection between BBB's
+    Running = True
+    While (Running)
+        If (BBB X has a really different values comparing with others)
+            If (BBB X is the master)
+                second highest pirority BBB = Y
+                Make Y the Master
+                Let Y gain control to electronics
+            Switch off BBB X
+        If (detect a critical failure)
+            Send critical failure signal to a BBB's
+
+Issues to overcome/solve:
+    1. How to set up connections between BBB's, how are they receiving data from other BBB's?
+    2. How to pirorize the BBB's?
+    3. How to deal with SPI connections?
+        Solution (?): Make one BBB master and the others slave, switch one slave to master when the master is no working. 
+
+
