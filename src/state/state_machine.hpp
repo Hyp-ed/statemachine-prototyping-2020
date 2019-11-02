@@ -22,26 +22,26 @@ namespace state_machine {
         Logger& log_;
         utils::System& sys_;
 
-        enum State {
-          kIdle,
-          kReady,
-          kAccelerating,
-          kDeccelerating,
-          kEmergencyBraking,
-          kFailureStopped,
-          kRunComplete,
-          kGarbage
-        };
+        // enum State {
+        //   kIdle,
+        //   kReady,
+        //   kAccelerating,
+        //   kDeccelerating,
+        //   kEmergencyBraking,
+        //   kFailureStopped,
+        //   kRunComplete,
+        //   kGarbage
+        // };
 
-        enum Event {
-          CriticalFailure,
-          StartCali,
-          Launch,
-          MaxDisMeet,
-          Stop,
-          NotMoving,
-          Reset
-        };
+        // enum Event {
+        //   CriticalFailure,
+        //   StartCali,
+        //   Launch,
+        //   MaxDisMeet,
+        //   Stop,
+        //   NotMoving,
+        //   Reset
+        // };
   };
 }
 

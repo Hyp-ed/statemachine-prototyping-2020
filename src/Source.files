@@ -1,7 +1,8 @@
 # Makefile include defining variable SRCS containing list of all source files
 
 SRCS := \
-  state/state.cpp \
+  state/state_machine.cpp \
+  state/table.cpp \
   utils/concurrent/barrier.cpp \
   utils/concurrent/condition_variable.cpp \
   utils/concurrent/lock.cpp \

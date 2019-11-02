@@ -1,6 +1,6 @@
 #include "utils/logger.hpp"
 #include "utils/system.hpp"
-#include "state/state.hpp"
+#include "state/state_machine.hpp"
 #include "utils/concurrent/thread.hpp"
 
 using hyped::utils::Logger;
