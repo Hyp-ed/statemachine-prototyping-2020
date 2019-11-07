@@ -3,6 +3,8 @@
 
 #include "utils/concurrent/thread.hpp"
 #include "utils/system.hpp"
+#include "table.hpp"
+#include "data/data.hpp"
 #include <iostream>
 #include <cstdint>
 
@@ -10,7 +12,9 @@ namespace hyped {
 
 using utils::concurrent::Thread;
 using utils::Logger;
+using data::ModuleStatus;
 using namespace std;
+
 
 namespace state_machine {
   class Main: public Thread {
@@ -22,26 +26,44 @@ namespace state_machine {
         Logger& log_;
         utils::System& sys_;
 
-        // enum State {
-        //   kIdle,
-        //   kReady,
-        //   kAccelerating,
-        //   kDeccelerating,
-        //   kEmergencyBraking,
-        //   kFailureStopped,
-        //   kRunComplete,
-        //   kGarbage
-        // };
+      string states[num_states] = {
+        "Idle",
+        "Ready",
+        "Accelerating",
+        "Deccelerating",
+        "EmergencyBraking",
+        "FailureStopped",
+        "RunComplete"
+      };
 
-        // enum Event {
-        //   CriticalFailure,
-        //   StartCali,
-        //   Launch,
-        //   MaxDisMeet,
-        //   Stop,
-        //   NotMoving,
-        //   Reset
-        // };
+      string events_[num_event] = {
+        "Critical_Failure",
+        "Start_Calibrating",
+        "Launch",
+        "Max_Distance_Reached",
+        "Stop",
+        "Stationary",
+        "Reset"
+      };
+
+      uint64_t time_start_;
+      uint64_t timeout_;
+
+      data::Data&         data_;
+      data::Telemetry     telemtry_data_;
+      data::StateMachine  sm_data_;
+
+      Table_Entry const * p_entry = table_begin();
+      Table_Entry const * const p_table_end = table_end();
+
+      bool state_found = false;
+      bool event_found = false;
+
+      int event_size = sizeof(events_)/sizeof(events_[0]);
+
+      Event_enum event;
+
+      string input;
   };
 }
 

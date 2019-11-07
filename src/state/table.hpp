@@ -9,7 +9,7 @@ enum State_enum {
     kEmergencyBraking,
     kFailureStopped,
     kRunComplete,
-    kLast
+    num_states
 };
 
 enum Event_enum {
@@ -20,7 +20,7 @@ enum Event_enum {
     Stop,
     NotMoving,
     Reset,
-    Last
+    num_event
 };
 
 struct Table_Entry

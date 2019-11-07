@@ -1,6 +1,10 @@
 #include "table.hpp"
 #include "state_machine.hpp"
+#include "utils/timer.hpp"
+#include "utils/system.hpp"
+#include "data/data.hpp"
 #include <iostream>
+#include <cstdint>
 
 namespace hyped{
 namespace state_machine{
@@ -8,48 +12,24 @@ namespace state_machine{
 Main::Main(uint8_t id, Logger& log)
     : Thread(id, log),
       log_(log),
-      sys_(utils::System::getSystem())
+      sys_(utils::System::getSystem()),
+      data_(data::Data::getInstance())
 {}
 
 void Main::run() {
 
     State_enum current_state_ = kIdle;
-    Event_enum event;
-
-    string input;
-
-    string states[] = {
-      "Idle",
-      "Ready",
-      "Accelerating",
-      "Deccelerating",
-      "EmergencyBraking",
-      "FailureStopped",
-      "RunComplete"
-    };
-
-    string events_[] = {
-      "Critical_Failure",
-      "Start_Calibrating",
-      "Launch",
-      "Max_Distance_Reached",
-      "Stop",
-      "Stationary",
-      "Reset"
-    };
 
     while (sys_.running_){
         
         cout << "Current state:" << states[current_state_] << endl;
         cin >> input;
 
-        Table_Entry const * p_entry = table_begin();
-        Table_Entry const * const p_table_end = table_end();
-        bool state_found = false;
-        bool event_found = false;
-        int event_size = sizeof(events_)/sizeof(events_[0]);
+        p_entry = table_begin();
+        state_found = false;
+        event_found = false;
 
-        for (int e = CriticalFailure; e != Last; e++ ) {
+        for (int e = CriticalFailure; e != num_event; e++ ) {
             if (input == events_[e]){
                 event_found = true;
                 event = static_cast<Event_enum>(e);
@@ -66,17 +46,12 @@ void Main::run() {
                 }
                 ++p_entry;
             }
+            if (p_entry == p_table_end) {
+                cout << "Illegal Input!" << endl;
+            }
         } else {
-            cout << "Illegal Input!";
+            cout << "Illegal Input!" << endl;
         }
-        
-
-        // if (event_found)
-        // {
-        //     // do sth
-        // }
-        
-
     }
 }
 
