@@ -2,11 +2,12 @@
 #include "state_machine.hpp"
 #include "utils/timer.hpp"
 #include "utils/system.hpp"
-#include "data/data.hpp"
 #include <iostream>
 #include <cstdint>
 
 namespace hyped{
+    using data::State_enum;
+    using data::current_state_;
 namespace state_machine{
 
 Main::Main(uint8_t id, Logger& log)
@@ -18,9 +19,14 @@ Main::Main(uint8_t id, Logger& log)
 
 void Main::run() {
 
-    State_enum current_state_ = kIdle;
+    State_enum current_state_ = State_enum::kIdle;
+    // State_enum current_state_ = State_enum::kIdle;
+
+    
 
     while (sys_.running_){
+
+        // sm_data_ = data_.getStateMachineData();
         
         cout << "Current state:" << states[current_state_] << endl;
         cin >> input;

@@ -3,6 +3,8 @@
 SRCS := \
   state/state_machine.cpp \
   state/table.cpp \
+  data/data.cpp\
+  telemetry/main.cpp \
   utils/concurrent/barrier.cpp \
   utils/concurrent/condition_variable.cpp \
   utils/concurrent/lock.cpp \

@@ -44,7 +44,7 @@ namespace hyped {
 
 
         // State Machine States
-        enum State {
+        enum State_enum {
             kIdle,
             kReady,
             kAccelerating,
@@ -55,13 +55,15 @@ namespace hyped {
             num_states
         };
 
+        extern State_enum current_state_;
+
         extern const char* states[num_states];
 
-        struct  StateMachine
-        {
-            bool critical_failure;
-            State current_state;
-        };
+        // struct  StateMachine
+        // {
+        //     bool critical_failure;
+        //     State_enum current_state;
+        // };
 
         // -------------------------------------------------------------------------------------------------
         // Common Data structure/class
@@ -80,12 +82,12 @@ namespace hyped {
         /**
          * @brief      Retrieves data related to the state machine. Data has high priority.
          */
-        StateMachine getStateMachineData();
+        // StateMachine getStateMachineData();
 
         /**
          * @brief      Should be called by state machine team to update data.
          */
-        void setStateMachineData(const StateMachine& sm_data);
+        // void setStateMachineData(const StateMachine& sm_data);
 
 
         /**
@@ -113,7 +115,7 @@ namespace hyped {
         void setTelemetryData(const Telemetry& telemetry_data);
 
         private:
-            StateMachine state_machine_;
+            // StateMachine state_machine_;
             Telemetry telemetry_;
 
 

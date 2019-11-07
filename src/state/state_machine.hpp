@@ -4,7 +4,7 @@
 #include "utils/concurrent/thread.hpp"
 #include "utils/system.hpp"
 #include "table.hpp"
-#include "data/data.hpp"
+// #include "data/data.hpp"
 #include <iostream>
 #include <cstdint>
 
@@ -13,6 +13,8 @@ namespace hyped {
 using utils::concurrent::Thread;
 using utils::Logger;
 using data::ModuleStatus;
+using data::State_enum;
+using data::current_state_;
 using namespace std;
 
 
@@ -26,7 +28,7 @@ namespace state_machine {
         Logger& log_;
         utils::System& sys_;
 
-      string states[num_states] = {
+      string states[State_enum::num_states] = {
         "Idle",
         "Ready",
         "Accelerating",
@@ -51,7 +53,7 @@ namespace state_machine {
 
       data::Data&         data_;
       data::Telemetry     telemtry_data_;
-      data::StateMachine  sm_data_;
+      // data::StateMachine  sm_data_;
 
       Table_Entry const * p_entry = table_begin();
       Table_Entry const * const p_table_end = table_end();
