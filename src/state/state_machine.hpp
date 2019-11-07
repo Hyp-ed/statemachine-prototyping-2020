@@ -4,7 +4,6 @@
 #include "utils/concurrent/thread.hpp"
 #include "utils/system.hpp"
 #include "table.hpp"
-// #include "data/data.hpp"
 #include <iostream>
 #include <cstdint>
 
@@ -15,6 +14,8 @@ using utils::Logger;
 using data::ModuleStatus;
 using data::State_enum;
 using data::current_state_;
+// using data::tlm_command_;
+// using data::command_received;
 using namespace std;
 
 
@@ -27,6 +28,10 @@ namespace state_machine {
       private:
         Logger& log_;
         utils::System& sys_;
+
+      // string tlm_command_;
+
+      // data::command_received;
 
       string states[State_enum::num_states] = {
         "Idle",
@@ -66,6 +71,7 @@ namespace state_machine {
       Event_enum event;
 
       string input;
+      // string tlm_command_;
   };
 }
 

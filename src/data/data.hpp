@@ -24,6 +24,8 @@ namespace hyped {
             kCriticalFailure
         };
 
+        extern bool command_received;
+
         struct Module
         {
             ModuleStatus module_status = ModuleStatus::kStart;
@@ -58,6 +60,9 @@ namespace hyped {
         extern State_enum current_state_;
 
         extern const char* states[num_states];
+
+        // extern char tlm_command_;
+        // extern std::string tlm_command_;
 
         // struct  StateMachine
         // {

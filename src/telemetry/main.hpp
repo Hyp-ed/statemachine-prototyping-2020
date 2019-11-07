@@ -13,6 +13,8 @@ using utils::concurrent::Thread;
 using utils::Logger;
 using data::State_enum;
 using data::current_state_;
+// using data::tlm_command_;
+// using data::command_received;
 using namespace std;
 
 namespace telemetry{
@@ -35,6 +37,12 @@ class Main: public Thread {
 
     State_enum current_state_;
     State_enum previous_state_;
+
+    string input;
+
+    // command_received = 0;
+
+    ;
 
     string states[State_enum::num_states] = {
         "Idle",

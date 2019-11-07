@@ -26,19 +26,19 @@ int main(int argc, char* argv[])
 
   // Initalise the threads here
   Thread* state_machine = new hyped::state_machine::Main(1, log_state);
-  Thread* telemetry = new hyped::telemetry::Main(2, log_tlm);
+  // Thread* telemetry = new hyped::telemetry::Main(2, log_tlm);
   // Thread* telemetry     = new hyped::telemetry::Main(2, log_te);
 
   // Start the threads here
   state_machine -> start();
-  telemetry -> start();
+  // telemetry -> start();
 
   // Join the threads here
   state_machine -> join();
-  telemetry -> join();
+  // telemetry -> join();
 
   delete state_machine;
-  delete telemetry;
+  // delete telemetry;
 
   return 0;
 }

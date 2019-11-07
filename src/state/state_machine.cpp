@@ -21,14 +21,11 @@ void Main::run() {
 
     State_enum current_state_ = State_enum::kIdle;
     // State_enum current_state_ = State_enum::kIdle;
-
     
-
     while (sys_.running_){
-
-        // sm_data_ = data_.getStateMachineData();
-        
+    
         cout << "Current state:" << states[current_state_] << endl;
+        // tlm_command_ = data::tlm_command_;
         cin >> input;
 
         p_entry = table_begin();
@@ -47,6 +44,7 @@ void Main::run() {
                 if (p_entry -> current_state == current_state_) {
                     if (p_entry -> events == event) {
                         current_state_ = p_entry -> next_state;
+                        log_.INFO("STATE", "Stage Changed");
                         break;
                     }
                 }
