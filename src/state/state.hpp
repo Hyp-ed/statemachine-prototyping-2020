@@ -1,11 +1,12 @@
 #ifndef STATE_MACHINE_HPP_
 #define STATE_MACHINE_HPP_
 
+#include <cstdint>
 #include "utils/concurrent/thread.hpp"
 #include "utils/system.hpp"
 #include "utils/logger.hpp"
-#include <cstdint>
 #include "data/data.hpp"
+#include "table.hpp"
 
 namespace hyped {
 
@@ -17,6 +18,8 @@ using data::Telemetry;
 using data::StateMachine;
 using data::Data;
 using data::State;
+using state_table::Event_enum;
+// using state_table::table;
 
 
 namespace state_machine {
@@ -32,6 +35,13 @@ namespace state_machine {
         StateMachine state_machine_data_;
         Data& data_;
         State current_state_;
+
+        Event_enum current_event_;
+
+        string t_commannd;
+
+        bool invalid_input_;
+        bool state_changed_;
   };
 }
 
