@@ -2,6 +2,8 @@
 #include "utils/system.hpp"
 #include "state/state.hpp"
 #include "utils/concurrent/thread.hpp"
+#include "telemetry/telemetry.hpp"
+#include "data/data.hpp"
 
 using hyped::utils::Logger;
 using hyped::utils::System;
@@ -14,6 +16,7 @@ int main(int argc, char* argv[])
 
   Logger log_system(sys.verbose, sys.debug);
   Logger log_state(sys.verbose_state, sys.debug_state);
+  Logger log_tlm(sys.verbose, sys.debug_tlm);
 
   log_system.INFO("MAIN", "Starting system with %d module", 1);
   log_system.DBG("MAIN", "DBG0");
@@ -23,14 +26,18 @@ int main(int argc, char* argv[])
 
   // Initalise the threads here
   Thread* state_machine = new hyped::state_machine::Main(1, log_state);
+  Thread* telemetry = new hyped::telemetry::Main(2, log_tlm);
 
   // Start the threads here
   state_machine->start();
+  telemetry->start();
 
   // Join the threads here
   state_machine->join();
+  telemetry->join();
 
   delete state_machine;
+  delete telemetry;
 
   return 0;
 }

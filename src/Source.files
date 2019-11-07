@@ -2,6 +2,8 @@
 
 SRCS := \
   state/state.cpp \
+  telemetry/telemetry.cpp \
+  data/data.cpp \
   utils/concurrent/barrier.cpp \
   utils/concurrent/condition_variable.cpp \
   utils/concurrent/lock.cpp \
