@@ -6,7 +6,6 @@
 #include "utils/system.hpp"
 #include "utils/logger.hpp"
 #include "data/data.hpp"
-// #include "table.hpp"
 
 namespace hyped {
 
@@ -18,8 +17,6 @@ using data::Telemetry;
 using data::StateMachine;
 using data::Data;
 using data::State;
-// using state_table::Event_enum;
-// using state_table::table;
 
 
 namespace state_machine {
