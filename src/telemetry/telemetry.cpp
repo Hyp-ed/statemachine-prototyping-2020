@@ -21,8 +21,9 @@ void Main::run() {
 
     // set telemetry data
     telemetry_data_.command = input;
+    telemetry_data_.command_sent = true;
     data_.setTelemetryData(telemetry_data_);
-    log_.INFO("Telemetry", "Command received");
+    log_.INFO("Telemetry", "Command received, sent to data structure");
   }
 }
 

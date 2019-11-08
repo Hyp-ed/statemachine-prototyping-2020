@@ -16,6 +16,7 @@ struct Module {};
 
 struct Telemetry : public Module {
   string command = "";
+  bool command_sent = false;
 };
 
 enum State {
