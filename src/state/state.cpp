@@ -41,16 +41,17 @@ void Main::run() {
         data_.setTelemetryData(telemetry_data_);
 
         // Start of Event Collector
-        if (t_commannd == "stop") current_event_ = Event_enum::Stop;
-        else if (t_commannd == "Critical_Failure") current_event_ = Event_enum::CriticalFailure;
-        else if (t_commannd == "Start_Calibrating") current_event_ = Event_enum::StartCali;
-        else if (t_commannd == "Launch") current_event_ = Event_enum::Launch;
-        else if (t_commannd == "Max_Distance_Reached") current_event_ = Event_enum::MaxDisMeet;
-        else if (t_commannd == "Not_Moving") current_event_ = Event_enum::NotMoving;
-        else if (t_commannd == "Reset") current_event_ = Event_enum::Reset;
-        else if (t_commannd != "")invalid_input_ = true;
+        if (t_commannd == "stop")												current_event_ =  Event_enum::Stop;
+        else if (t_commannd == "Critical_Failure") 			current_event_ =  Event_enum::CriticalFailure;
+        else if (t_commannd == "Start_Calibrating") 		current_event_ =  Event_enum::StartCali;
+        else if (t_commannd == "Launch") 								current_event_ =  Event_enum::Launch;
+        else if (t_commannd == "Max_Distance_Reached")	current_event_ =	Event_enum::MaxDisMeet;
+        else if (t_commannd == "Not_Moving") 						current_event_ =  Event_enum::NotMoving;
+        else if (t_commannd == "Reset") 								current_event_ =  Event_enum::Reset;
+        else if (t_commannd != "")											invalid_input_ =  true;
         // End of Event Collector
 
+        // There is no mean to do anything but shouting to the user :(
         if (invalid_input_){
           log_.INFO("STATE", "Invalid input!");
         } else {
@@ -76,7 +77,7 @@ void Main::run() {
               log_.INFO("STATE", "Switch to Accelerarting");
               break;
             case State::kDeccelerating:
-              log_.INFO("STATE", "Switch to Deccelerating");
+              log_.INFO("STATE", "Switch to Decelerating");
               break;
             case State::kRunComplete:
               log_.INFO("STATE", "Switch to Run Completed");
