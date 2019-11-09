@@ -1,7 +1,7 @@
 # Makefile include defining variable SRCS containing list of all source files
 
 SRCS := \
-  state/state.cpp \
+  state/main.cpp \
   telemetry/telemetry.cpp \
   data/data.cpp \
   utils/concurrent/barrier.cpp \

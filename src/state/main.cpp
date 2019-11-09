@@ -1,4 +1,4 @@
-#include "state.hpp"
+#include "main.hpp"
 
 namespace hyped {
 namespace state_machine {
@@ -7,7 +7,8 @@ Main::Main(uint8_t id, Logger& log)
     : Thread(id, log),
       log_(log),
       sys_(System::getSystem()),
-      data_(Data::getInstance())
+      data_(Data::getInstance()),
+      checker_(log)
 {}
 
 void Main::run() {
@@ -18,37 +19,26 @@ void Main::run() {
       telemetry_data_ = data_.getTelemetryData();
 
       current_state_ = state_machine_data_.current_state_;
+      command_received_ = telemetry_data_.command;
 
       switch(current_state_) {
         case State::kIdle:
-          if(telemetry_data_.command=="stop"){
-            state_machine_data_.current_state_= State::kFailureStopped;
-            log_.INFO("STATE", "Changed to Failure Stopped");
-          } else if(telemetry_data_.command == "Critical_failure"){
-            state_machine_data_.current_state_= State::kFailureStopped;
-            log_.INFO("STATE", "Changed to Failure Stopped");
-          } else if(telemetry_data_.command == "Start_calibrating"){
-            state_machine_data_.current_state_ = State::kReady;
-            log_.INFO("STATE", "Changed to Ready");
-          }
-          else {
-            //log_.INFO("STATE", "Illegal input");
+          if(checker_.checkCriticalFailure(command_received_)) break;
+          if(checkStopCommand(command_received_)) break;
+          if(checkCalibrateCommand(command_received_)) break;
+          if(first_check){
+            log_.INFO("STATE", "Invalid input");
+            first_check = false;
           }
           break;
         case State::kReady:
-          if(telemetry_data_.command=="stop"){
-            state_machine_data_.current_state_= State::kFailureStopped;
-            log_.INFO("STATE", "Changed to Failure Stopped");
-          } else if(telemetry_data_.command == "Critical_failure"){
-            state_machine_data_.current_state_= State::kFailureStopped;
-            log_.INFO("STATE", "Changed to Failure Stopped");
-          } else if(telemetry_data_.command == "Launch"){
-            state_machine_data_.current_state_ = State::kAccelerating;
-            log_.INFO("STATE", "Changed to Accelerating");
+          if(checkCriticalFailure(command_received_)) break;
+          if(checkStopCommand(command_received_)) break;
+          if(checkLaunchCommand(command_received_)) break;
+          if(first_check){
+            log_.INFO("STATE", "Invalid input");
+            first_check = false;
           }
-          else {
-            // log_.INFO("STATE", "Illegal input");          
-            }
           break;
         case State::kAccelerating:
           if(telemetry_data_.command=="stop"){
@@ -115,4 +105,5 @@ void Main::run() {
         }
     }
 }
+
 }} // namespace hyped::state_machine
