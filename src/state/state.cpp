@@ -76,7 +76,7 @@ void Main::run() {
               log_.INFO("STATE", "Switch to Accelerarting");
               break;
             case State::kDeccelerating:
-              log_.INFO("STATE", "Switch to Decerlerating");
+              log_.INFO("STATE", "Switch to Deccelerating");
               break;
             case State::kRunComplete:
               log_.INFO("STATE", "Switch to Run Completed");

@@ -29,21 +29,8 @@ enum State {
   kFailureStopped,
   kFinished,
   num_state,
-  kGar // Barbage State
+  kGar // Garbage State
 };
-
-// enum Event {
-//   stop,
-//   critFail,
-//   startCali,
-//   launch,
-//   maxDist,
-//   notMove,
-//   reset,
-//   num_event
-// };
-
-// State table 
 
 struct StateMachine : public Module {
   State current_state_ = State::kIdle;
