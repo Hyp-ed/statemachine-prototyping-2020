@@ -25,8 +25,7 @@ enum State {
   kDeccelerating,
   kEmergencyBraking,
   kRunComplete,
-  kFailureStopped,
-  kFinished
+  kFailureStopped
 };
 
 struct StateMachine : public Module {

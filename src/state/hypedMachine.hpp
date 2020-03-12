@@ -9,24 +9,28 @@ namespace hyped {
 
 using data::Data;
 using utils::Logger;
+using data::State;
 
 namespace state_machine {
 class HypedMachine {
  public:
   HypedMachine(Logger& log);
 
-  bool checkCriticalFailure(string command);
-  bool checkStopCommand(string command);
-  bool checkCalibrateCommand(string command);
-  bool checkLaunchCommand(string command);
-  bool checkMaxDistanceReached(string command);
-  bool checkAtRest(string command);
+  bool checkCriticalFailure(string command, string previous);
+  bool checkCriticalFailureMoving(string command, string previous);
+  bool checkStopCommand(string command, string previous);
+  bool checkStopCommandMoving(string command, string previous);
+  bool checkCalibrateCommand(string command, string previous);
+  bool checkLaunchCommand(string command, string previous);
+  bool checkMaxDistanceReached(string command, string previous);
+  bool checkAtRest(string command, string previous);
+  bool checkReset(string command, string previous);
+  bool checkResetAfterFailure(string command, string previous);
   
  private:
   Logger& log_;
   Data& data_;
   data::StateMachine state_machine_data_;
-  atomic<bool> firstCheck_;
 };
 
 } } //namespace hyped::state_machine

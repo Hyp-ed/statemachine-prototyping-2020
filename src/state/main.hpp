@@ -34,6 +34,7 @@ class Main: public Thread {
   Data&         data_;
   State         current_state_;
   string        command_received_;
+  string        previous_command_;
   HypedMachine  checker_;
 };
 

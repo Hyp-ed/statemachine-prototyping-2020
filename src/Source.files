@@ -2,6 +2,7 @@
 
 SRCS := \
   state/main.cpp \
+  state/hypedMachine.cpp \
   telemetry/telemetry.cpp \
   data/data.cpp \
   utils/concurrent/barrier.cpp \
